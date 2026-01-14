@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TASV</title>
+    <meta name="description" content="Privacy Policy for TASV - The Advanced Smart Vault. Learn how we protect your data.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06B6D4;
+            --primary-dark: #0891B2;
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --surface: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --accent-purple: #8B5CF6;
+            --accent-green: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+                var(--bg-darker);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header .updated {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .policy-section {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .policy-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .policy-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .policy-section ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-section strong {
+            color: var(--text-primary);
+        }
+
+        .highlight-box {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .permissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .permissions-table th,
+        .permissions-table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .permissions-table th {
+            color: var(--text-primary);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .permissions-table td {
+            color: var(--text-secondary);
+        }
+
+        .permissions-table code {
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+        }
+
+        .summary-item span:first-child {
+            font-size: 1.25rem;
+        }
+
+        .summary-item span:last-child {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .policy-section {
+                padding: 1.5rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .permissions-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <span class="logo-text">TASV</span>
+            </a>
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="page-header">
+            <h1>Privacy Policy</h1>
+            <p class="updated">Last Updated: January 2026</p>
+        </div>
+
+        <section class="policy-section">
+            <h2>🛡️ Introduction</h2>
+            <p>TASV ("The Advanced Smart Vault") is committed to protecting your privacy. This Privacy Policy explains how our mobile application handles your information.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>📱 Information We Access</h2>
+            
+            <h3>Device Media Access</h3>
+            <p>TASV is a gallery and vault application that requires access to your device's photos, videos, and media files to function. We access:</p>
+            <ul>
+                <li><strong>Photos and Images:</strong> To display and manage your photo library</li>
+                <li><strong>Videos:</strong> To display and play your video files</li>
+                <li><strong>Media Location Data:</strong> To read EXIF GPS data embedded in your photos for location-based organization and map view features</li>
+            </ul>
+
+            <h3>Local Storage</h3>
+            <p>We store the following data locally on your device:</p>
+            <ul>
+                <li><strong>App Preferences:</strong> Your settings and preferences within the app</li>
+                <li><strong>Favorites:</strong> List of media items you've marked as favorites</li>
+                <li><strong>Ratings:</strong> Any ratings you assign to your media</li>
+                <li><strong>Custom Albums:</strong> Albums you create to organize your media</li>
+                <li><strong>Vault Data:</strong> Encrypted vault contents, vault PINs (hashed), folder structures, and access logs</li>
+                <li><strong>Biometric Settings:</strong> Your preference for biometric unlock (fingerprint/face)</li>
+            </ul>
+
+            <h3>Vault Feature</h3>
+            <p>TASV includes a secure vault feature that allows you to:</p>
+            <ul>
+                <li>Create multiple password-protected vaults</li>
+                <li>Organize vault contents into folders</li>
+                <li>Move photos and videos to secure storage</li>
+                <li>Track access logs for security monitoring</li>
+            </ul>
+            <p>All vault data is stored locally on your device with PIN protection. Vault PINs are stored as hashed values and cannot be recovered if forgotten.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>🚫 Information We Do NOT Collect</h2>
+            <p>TASV is designed with privacy as a priority:</p>
+            <ul>
+                <li><strong>No Data Collection:</strong> We do not collect, transmit, or store any of your personal data on external servers</li>
+                <li><strong>No Analytics:</strong> We do not use third-party analytics services</li>
+                <li><strong>No Advertising:</strong> We do not display advertisements or share data with advertisers</li>
+                <li><strong>No Account Required:</strong> We do not require you to create an account or provide personal information</li>
+                <li><strong>No Cloud Sync:</strong> Your media, vault contents, and preferences remain on your device only</li>
+                <li><strong>No Backup to Cloud:</strong> Vault contents are never uploaded to any cloud service</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>📋 Permissions Used</h2>
+            <p>The app requires the following permissions:</p>
+            <table class="permissions-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>READ_MEDIA_IMAGES</code></td>
+                        <td>Access photos in your gallery</td>
+                    </tr>
+                    <tr>
+                        <td><code>READ_MEDIA_VIDEO</code></td>
+                        <td>Access videos in your gallery</td>
+                    </tr>
+                    <tr>
+                        <td><code>READ_EXTERNAL_STORAGE</code></td>
+                        <td>Access media on older Android versions (API < 33)</td>
+                    </tr>
+                    <tr>
+                        <td><code>WRITE_EXTERNAL_STORAGE</code></td>
+                        <td>Save edited images and vault files (API < 30)</td>
+                    </tr>
+                    <tr>
+                        <td><code>ACCESS_MEDIA_LOCATION</code></td>
+                        <td>Read GPS location from photo EXIF data for map features</td>
+                    </tr>
+                    <tr>
+                        <td><code>SET_WALLPAPER</code></td>
+                        <td>Set images as device wallpaper</td>
+                    </tr>
+                    <tr>
+                        <td><code>USE_BIOMETRIC</code></td>
+                        <td>Enable fingerprint/face unlock for app security</td>
+                    </tr>
+                    <tr>
+                        <td><code>ACCESS_FINE_LOCATION</code></td>
+                        <td>Show your current location on the map view</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="policy-section">
+            <h2>🔒 Data Security</h2>
+            <p>All your data remains on your device:</p>
+            <ul>
+                <li>Media files are accessed directly from your device storage</li>
+                <li>Vault contents are stored in the app's private directory</li>
+                <li>Vault PINs are hashed before storage (cannot be reversed)</li>
+                <li>Preferences are stored locally using secure storage mechanisms</li>
+                <li>No data is transmitted over the internet</li>
+                <li>Biometric authentication uses your device's secure hardware</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>🔐 Vault Security</h2>
+            <p>The vault feature provides:</p>
+            <ul>
+                <li>PIN-protected access to each vault (4-6 digit PIN)</li>
+                <li>Optional biometric unlock</li>
+                <li>Access logging for security auditing</li>
+                <li>Automatic log retention management</li>
+                <li>Secure file storage in app-private directories</li>
+            </ul>
+            <div class="highlight-box warning">
+                <strong>⚠️ Important:</strong> If you forget your vault PIN, there is no way to recover it. The vault contents would be inaccessible.
+            </div>
+        </section>
+
+        <section class="policy-section">
+            <h2>🌐 Third-Party Services</h2>
+            <p>TASV does not integrate with any third-party services that collect user data. Map features use OpenStreetMap tiles which may log standard web request data (IP address) on their servers.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>👶 Children's Privacy</h2>
+            <p>TASV does not knowingly collect any personal information from children under 13 years of age. The app simply provides access to media already stored on the device.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>📝 Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this policy.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>⚖️ Your Rights</h2>
+            <p>Since we do not collect any personal data, there is no personal data to access, modify, or delete from our systems. All your data remains under your control on your device.</p>
+            <p>To delete all app data including vault contents:</p>
+            <ul>
+                <li>Uninstall the app, or</li>
+                <li>Clear app data from your device settings</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>📧 Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <p><strong>Email:</strong> <a href="mailto:privacy@rohitranjan.co.in" style="color: var(--primary);">privacy@rohitranjan.co.in</a></p>
+        </section>
+
+        <section class="policy-section">
+            <h2>✅ Summary</h2>
+            <p>TASV is a privacy-focused gallery and vault app that:</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span>📴</span>
+                    <span>Works entirely offline</span>
+                </div>
+                <div class="summary-item">
+                    <span>💾</span>
+                    <span>Stores all data locally</span>
+                </div>
+                <div class="summary-item">
+                    <span>🔐</span>
+                    <span>Secure vault with PIN protection</span>
+                </div>
+                <div class="summary-item">
+                    <span>🚫</span>
+                    <span>No data collection</span>
+                </div>
+                <div class="summary-item">
+                    <span>👤</span>
+                    <span>No account required</span>
+                </div>
+                <div class="summary-item">
+                    <span>🚷</span>
+                    <span>No ads or trackers</span>
+                </div>
+                <div class="summary-item">
+                    <span>👆</span>
+                    <span>Biometric authentication</span>
+                </div>
+                <div class="summary-item">
+                    <span>❤️</span>
+                    <span>Your data stays yours</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 TASV - The Advanced Smart Vault. Made with ❤️ for privacy-conscious users.</p>
+        <p style="margin-top: 0.5rem;"><a href="index.html">Back to Home</a></p>
+    </footer>
+</body>
+</html>

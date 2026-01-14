@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASV - The Advanced Smart Vault | Privacy-First Gallery & Vault App</title>
+    <meta name="description" content="Secure your photos with TASV - a privacy-first gallery and multi-vault app. 100% offline, no tracking, professional editing, and advanced organization features.">
+    <meta name="keywords" content="photo vault, secure gallery, private photos, offline gallery, photo organizer, multi-vault, biometric lock">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TASV - The Advanced Smart Vault">
+    <meta property="og:description" content="Privacy-first gallery & vault app with professional features">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TASV - The Advanced Smart Vault">
+    <meta name="twitter:description" content="Privacy-first gallery & vault app">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #06B6D4;
+            --primary-dark: #0891B2;
+            --primary-light: #22D3EE;
+            --accent-purple: #8B5CF6;
+            --accent-pink: #EC4899;
+            --accent-green: #10B981;
+            --accent-orange: #F59E0B;
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --surface: #1E293B;
+            --surface-light: #334155;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: -250px;
+            left: -250px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-purple);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-pink);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            opacity: 0;
+            animation: slideInLeft 1s ease forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #06B6D4, #8B5CF6, #EC4899);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .phone-mockup {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            animation: phoneFloat 6s ease-in-out infinite;
+        }
+
+        .phone-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% {
+                transform: perspective(1000px) rotateY(-10deg) rotateX(5deg) translateY(0px);
+            }
+            50% {
+                transform: perspective(1000px) rotateY(-10deg) rotateX(5deg) translateY(-20px);
+            }
+        }
+
+        .phone-frame {
+            background: linear-gradient(135deg, var(--surface), var(--surface-light));
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        .phone-screen {
+            border-radius: 32px;
+            overflow: hidden;
+            background: var(--bg-darker);
+            aspect-ratio: 9/19.5;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.25rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .feature-card.revealed {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+        .feature-card:nth-child(7) { animation-delay: 0.7s; }
+        .feature-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Gallery Views Section */
+        .gallery-views {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(139, 92, 246, 0.05));
+        }
+
+        .views-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .view-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .view-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .view-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .view-content {
+            padding: 2rem;
+        }
+
+        .view-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .view-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Vault Section */
+        .vault-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .vault-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vault-cards {
+            position: relative;
+            width: 320px;
+            height: 400px;
+        }
+
+        .vault-card-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 1rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .vault-card-item:nth-child(1) {
+            transform: translateY(0) rotate(0deg);
+            z-index: 3;
+        }
+
+        .vault-card-item:nth-child(2) {
+            transform: translateY(20px) rotate(-3deg);
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        .vault-card-item:nth-child(3) {
+            transform: translateY(40px) rotate(3deg);
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .vault-cards:hover .vault-card-item:nth-child(1) {
+            transform: translateY(-20px) rotate(5deg);
+        }
+
+        .vault-cards:hover .vault-card-item:nth-child(2) {
+            transform: translateY(10px) rotate(-5deg);
+        }
+
+        .vault-cards:hover .vault-card-item:nth-child(3) {
+            transform: translateY(40px) rotate(5deg);
+        }
+
+        .vault-card-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .vault-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .vault-feature {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .vault-feature:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .vault-feature-icon {
+            font-size: 2rem;
+        }
+
+        .vault-feature-text h4 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vault-feature-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Privacy Section */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .privacy-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .privacy-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: privacyPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes privacyPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .privacy-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Analytics Section */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .analytics-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analytics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-purple));
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.2);
+            border-color: var(--primary);
+        }
+
+        .analytics-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .analytics-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .analytics-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .analytics-features-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .analytics-features-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .analytics-features-list li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .analytics-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 40px;
+            padding: 6rem 4rem;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: ctaGlow 10s linear infinite;
+        }
+
+        @keyframes ctaGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-icon {
+            font-size: 2rem;
+        }
+
+        .store-text {
+            text-align: left;
+        }
+
+        .store-text small {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .store-text strong {
+            display: block;
+            font-size: 1.125rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 0 2rem;
+            margin-top: 8rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .vault-showcase {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .views-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 50px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vault-features {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 3rem 2rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="TASV Logo" class="logo-icon">
+                <span>TASV</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#vault">Vault</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#download" class="nav-cta">Download</a></li>
+            </ul>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span><i class="fas fa-rocket"></i></span>
+                        <span>Your Photos. Your Privacy. Your Control.</span>
+                    </div>
+                    <h1 class="hero-title">The Most Advanced Gallery & Vault App</h1>
+                    <p class="hero-subtitle">Privacy-First. Feature-Rich. Beautifully Designed.</p>
+                    <p class="hero-description">
+                        TASV is the ultimate photo gallery and vault app that puts your privacy first.
+                        100% offline, no tracking, no ads. Enjoy professional editing tools, multi-vault security,
+                        and 7 different viewing modes - all on your device.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#download" class="btn btn-primary">
+                            <span>Download Now</span>
+                            <span>→</span>
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <span>Explore Features</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-lock"></i></div>
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Offline</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-ban"></i></div>
+                            <div class="stat-value">Zero</div>
+                            <div class="stat-label">Tracking</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">View Modes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="images/gallery_screen_1.jpg" alt="TASV Gallery Interface">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-star"></i> POWERFUL FEATURES</div>
+                <h2 class="section-title">Everything You Need in One App</h2>
+                <p class="section-description">
+                    From secure vaults to professional editing, TASV packs powerful features
+                    while keeping your data completely private.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3 class="feature-title">Multi-Vault Security</h3>
+                    <p class="feature-description">
+                        Create unlimited secure vaults with individual PIN codes. Each vault can have
+                        its own folders and biometric unlock. Complete isolation for your private photos.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                    <h3 class="feature-title">7 View Modes</h3>
+                    <p class="feature-description">
+                        Browse your photos in Grid, List, Timeline, Calendar, Map, Filmstrip, or Folder view.
+                        Each mode optimized for different ways to explore your memories.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                    <h3 class="feature-title">Professional Editor</h3>
+                    <p class="feature-description">
+                        50+ filters, healing brush, curves, HSL adjustments, and more. No need for external
+                        apps - professional editing tools built right in.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                    <h3 class="feature-title">Smart Organization</h3>
+                    <p class="feature-description">
+                        Tags with 12 colors, unlimited albums, 5-star ratings, and smart collections.
+                        Organize thousands of photos effortlessly.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="feature-title">100% Private</h3>
+                    <p class="feature-description">
+                        Completely offline. No tracking, no analytics, no ads, no cloud uploads.
+                        Your photos stay on your device, under your control.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3 class="feature-title">Interactive Map</h3>
+                    <p class="feature-description">
+                        View your geotagged photos on an interactive map with smart clustering.
+                        Rediscover memories by where you took them.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3 class="feature-title">Complete Metadata</h3>
+                    <p class="feature-description">
+                        Full EXIF viewing and editing. See camera settings, location data, and edit
+                        metadata like a pro with complete control.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-recycle"></i></div>
+                    <h3 class="feature-title">Recycle Bin</h3>
+                    <p class="feature-description">
+                        30-day recovery period for deleted items. Change your mind? Restore any photo
+                        or video within a month of deletion.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Views Section -->
+    <section id="gallery-views" class="gallery-views">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-eye"></i> VIEW MODES</div>
+                <h2 class="section-title">Browse Your Way</h2>
+                <p class="section-description">
+                    7 different ways to explore your photo library. Switch between views instantly
+                    to find exactly what you're looking for.
+                </p>
+            </div>
+            <div class="views-grid">
+                <div class="view-card reveal">
+                    <img src="images/gallery_screen_1.jpg" alt="Grid View" class="view-image">
+                    <div class="view-content">
+                        <h3 class="view-title">Grid & List Views</h3>
+                        <p class="view-description">
+                            Classic grid view with customizable columns, or detailed list view showing
+                            filenames, dates, and resolutions. The views you use every day, perfected.
+                        </p>
+                    </div>
+                </div>
+                <div class="view-card reveal">
+                    <img src="images/albums.jpg" alt="Album View" class="view-image">
+                    <div class="view-content">
+                        <h3 class="view-title">Albums & Collections</h3>
+                        <p class="view-description">
+                            Organize photos into unlimited custom albums. Smart collections automatically
+                            group screenshots, videos, and recent photos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vault Section -->
+    <section id="vault">
+        <div class="container">
+            <div class="vault-showcase">
+                <div class="vault-text reveal">
+                    <div class="section-badge"><i class="fas fa-vault"></i> MULTI-VAULT SYSTEM</div>
+                    <h2 class="section-title">Secure Your Memories</h2>
+                    <p class="section-description">
+                        Not just a hidden folder - TASV offers true multi-vault architecture.
+                        Create unlimited vaults, each with its own PIN and folders. Perfect for
+                        organizing different types of private content.
+                    </p>
+                    <div class="vault-features">
+                        <div class="vault-feature">
+                            <div class="vault-feature-icon"><i class="fas fa-key"></i></div>
+                            <div class="vault-feature-text">
+                                <h4>Individual PINs</h4>
+                                <p>Each vault has its own 6-digit PIN code</p>
+                            </div>
+                        </div>
+                        <div class="vault-feature">
+                            <div class="vault-feature-icon"><i class="fas fa-folder"></i></div>
+                            <div class="vault-feature-text">
+                                <h4>Folder Organization</h4>
+                                <p>Create folders within each vault</p>
+                            </div>
+                        </div>
+                        <div class="vault-feature">
+                            <div class="vault-feature-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="vault-feature-text">
+                                <h4>Access Logs</h4>
+                                <p>Security audit trail with timestamps</p>
+                            </div>
+                        </div>
+                        <div class="vault-feature">
+                            <div class="vault-feature-icon"><i class="fas fa-fingerprint"></i></div>
+                            <div class="vault-feature-text">
+                                <h4>Biometric Unlock</h4>
+                                <p>Fingerprint or Face ID support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vault-visual reveal">
+                    <div class="vault-cards">
+                        <div class="vault-card-item">
+                            <div class="vault-card-content">
+                                <img src="images/vault.jpg" alt="Vault 1">
+                            </div>
+                        </div>
+                        <div class="vault-card-item">
+                            <div class="vault-card-content">
+                                <img src="images/vault.jpg" alt="Vault 2">
+                            </div>
+                        </div>
+                        <div class="vault-card-item">
+                            <div class="vault-card-content">
+                                <img src="images/vault.jpg" alt="Vault 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section id="privacy">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-shield-alt"></i> PRIVACY FIRST</div>
+                <h2 class="section-title">Your Photos. Your Device. Your Privacy.</h2>
+                <p class="section-description">
+                    We believe your photos should stay on your device. Period. No cloud uploads,
+                    no tracking, no analytics - just pure offline functionality.
+                </p>
+            </div>
+            <div class="privacy-grid">
+                <div class="privacy-item reveal">
+                    <div class="privacy-icon"><i class="fas fa-lock"></i></div>
+                    <h3>100% Offline</h3>
+                    <p>No internet required. Works completely offline.</p>
+                </div>
+                <div class="privacy-item reveal">
+                    <div class="privacy-icon"><i class="fas fa-ban"></i></div>
+                    <h3>No Tracking</h3>
+                    <p>Zero analytics, telemetry, or user tracking.</p>
+                </div>
+                <div class="privacy-item reveal">
+                    <div class="privacy-icon"><i class="fas fa-hdd"></i></div>
+                    <h3>Local Storage</h3>
+                    <p>All data stored exclusively on your device.</p>
+                </div>
+                <div class="privacy-item reveal">
+                    <div class="privacy-icon"><i class="fas fa-ad"></i></div>
+                    <h3>No Ads</h3>
+                    <p>Ad-free experience. No data sharing with advertisers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="gallery-views">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-chart-line"></i> STORAGE ANALYTICS</div>
+                <h2 class="section-title">Understand Your Media Library</h2>
+                <p class="section-description">
+                    Get powerful insights into your photo and video collection with our comprehensive
+                    storage analytics. All analysis happens locally on your device - no cloud required.
+                </p>
+            </div>
+            <div class="analytics-grid">
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="analytics-title">Storage Overview</h3>
+                    <p class="analytics-description">
+                        See exactly how much space your media takes up with detailed breakdowns by type,
+                        size, and format. Track your storage usage at a glance.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Total storage used</li>
+                        <li>Media type breakdown (photos, videos, GIFs)</li>
+                        <li>Screenshot detection</li>
+                        <li>RAW file tracking</li>
+                    </ul>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3 class="analytics-title">Media Breakdown</h3>
+                    <p class="analytics-description">
+                        Visual charts showing the composition of your library - images vs videos,
+                        resolution distribution, and file size categories.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Interactive pie charts</li>
+                        <li>Image/video ratio</li>
+                        <li>Resolution analysis</li>
+                        <li>Size distribution</li>
+                    </ul>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3 class="analytics-title">Time Analysis</h3>
+                    <p class="analytics-description">
+                        Discover your photography patterns over time. See when you took the most photos
+                        and track your media creation trends by year and month.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Photos by year</li>
+                        <li>Monthly trends</li>
+                        <li>Peak activity periods</li>
+                        <li>Timeline visualization</li>
+                    </ul>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-folder-open"></i></div>
+                    <h3 class="analytics-title">Folder Analysis</h3>
+                    <p class="analytics-description">
+                        See which folders contain the most media and consume the most storage.
+                        Understand your organization patterns at a glance.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Folder size breakdown</li>
+                        <li>Files per folder</li>
+                        <li>Top storage consumers</li>
+                        <li>Organization insights</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-camera-retro"></i></div>
+                    <h3 class="analytics-title">Camera Analysis</h3>
+                    <p class="analytics-description">
+                        Know which devices captured your memories. Track usage across different
+                        cameras and phones to understand your shooting history.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Camera/device breakdown</li>
+                        <li>Photos per device</li>
+                        <li>EXIF data insights</li>
+                        <li>Device timeline</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 class="analytics-title">Location Analysis</h3>
+                    <p class="analytics-description">
+                        Visualize where your photos were taken on an interactive map.
+                        Discover your most photographed locations and travel patterns.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Interactive location map</li>
+                        <li>Geotagged photo count</li>
+                        <li>Location clusters</li>
+                        <li>Travel visualization</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-clone"></i></div>
+                    <h3 class="analytics-title">Duplicate Detector</h3>
+                    <p class="analytics-description">
+                        Find and manage duplicate photos to reclaim storage space.
+                        Smart detection identifies similar and identical files.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Duplicate group detection</li>
+                        <li>Similar photo finder</li>
+                        <li>Storage savings estimate</li>
+                        <li>Batch cleanup tools</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-video"></i></div>
+                    <h3 class="analytics-title">Video Analytics</h3>
+                    <p class="analytics-description">
+                        Dedicated insights for your video collection including total duration,
+                        size analysis, and format breakdown.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Total video duration</li>
+                        <li>Duration distribution</li>
+                        <li>Video size analysis</li>
+                        <li>Format breakdown</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-broom"></i></div>
+                    <h3 class="analytics-title">Cleanup Suggestions</h3>
+                    <p class="analytics-description">
+                        Get smart recommendations to free up storage space. Identify large files,
+                        old screenshots, and other candidates for cleanup.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Largest files list</li>
+                        <li>Screenshot cleanup</li>
+                        <li>Storage optimization tips</li>
+                        <li>Quality-based suggestions</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-question-circle"></i> QUESTIONS</div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>How secure are the vaults?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Vaults use military-grade encryption with 6-digit PIN codes stored as hashed values.
+                            Files are copied to the app's private isolated directory, inaccessible to other apps.
+                            Optional biometric authentication adds an extra security layer.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>Can anyone access my photos?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            No. Your photos are stored locally on your device in encrypted vaults. Without your PIN
+                            or biometric authentication, vault contents are completely inaccessible. We don't have
+                            access to your photos - they never leave your device.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>Do you collect any data?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Absolutely not. TASV collects zero data. No analytics, no tracking, no telemetry.
+                            The app works 100% offline and never communicates with external servers. Your photos
+                            and data remain exclusively on your device.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>What analytics features are available?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Free tier includes: storage overview, media breakdown charts, and time analysis (photos by year/month).
+                            Pro unlocks: folder analysis, camera/device breakdown, location analysis with interactive maps,
+                            duplicate detection, video analytics, cleanup suggestions, and quality analysis tools.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>Can I use this app offline?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Yes! TASV is designed to work 100% offline. No internet connection is required for any
+                            feature - gallery browsing, vault access, photo editing, or organization. Your photos
+                            stay on your device, always accessible.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>How many vaults can I create?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Free tier allows 1 vault with up to 5 items. Pro tier unlocks unlimited vaults with
+                            unlimited items. Each vault can have its own folders, PIN code, and organizational structure.
+                            Perfect for separating different types of private content.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>What happens if I forget my PIN?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            For security reasons, PINs cannot be recovered. If you forget your vault PIN, the contents
+                            become permanently inaccessible. This is by design - true security means we cannot bypass
+                            or reset your PIN. We recommend using biometric unlock as a backup method.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>Which file formats are supported?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Images: JPEG, PNG, GIF, WebP, BMP, TIFF, HEIC/HEIF. Videos: MP4, MKV, AVI, MOV, WebM,
+                            3GP, FLV, WMV. Pro tier adds RAW file support for professional photographers. All formats
+                            work in gallery view and can be added to vaults.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="download">
+        <div class="container">
+            <div class="cta-section reveal">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Secure Your Memories?</h2>
+                    <p class="cta-description">
+                        Join thousands of users who trust TASV to keep their photos private and secure.
+                        Download now and experience the most advanced gallery & vault app.
+                    </p>
+                    <div class="store-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=in.co.rohitranjan.tasv" target="_blank" rel="noopener noreferrer" class="store-btn">
+                            <span class="store-icon"><i class="fab fa-google-play"></i></span>
+                            <div class="store-text">
+                                <small>GET IT ON</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><img src="images/logo.png" alt="TASV Logo" class="footer-logo"> TASV</h3>
+                    <p>
+                        The Advanced Smart Vault - your privacy-first gallery and vault app.
+                        Secure, feature-rich, and beautifully designed.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#analytics">Analytics</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="mailto:privacy@rohitranjan.co.in">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TASV. All rights reserved. Made with ❤️ for privacy.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Feature cards reveal
+        const featureCards = document.querySelectorAll('.feature-card');
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        featureCards.forEach(card => featureObserver.observe(card));
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other FAQs
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current FAQ
+                if (isActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
