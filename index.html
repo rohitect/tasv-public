@@ -17,6 +17,11 @@
     <meta name="twitter:title" content="TASV - The Advanced Smart Vault">
     <meta name="twitter:description" content="Privacy-first gallery & vault app">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -533,13 +538,17 @@
         }
 
         .feature-card:nth-child(1) { animation-delay: 0.1s; }
-        .feature-card:nth-child(2) { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) { animation-delay: 0.3s; }
-        .feature-card:nth-child(4) { animation-delay: 0.4s; }
-        .feature-card:nth-child(5) { animation-delay: 0.5s; }
-        .feature-card:nth-child(6) { animation-delay: 0.6s; }
-        .feature-card:nth-child(7) { animation-delay: 0.7s; }
-        .feature-card:nth-child(8) { animation-delay: 0.8s; }
+        .feature-card:nth-child(2) { animation-delay: 0.15s; }
+        .feature-card:nth-child(3) { animation-delay: 0.2s; }
+        .feature-card:nth-child(4) { animation-delay: 0.25s; }
+        .feature-card:nth-child(5) { animation-delay: 0.3s; }
+        .feature-card:nth-child(6) { animation-delay: 0.35s; }
+        .feature-card:nth-child(7) { animation-delay: 0.4s; }
+        .feature-card:nth-child(8) { animation-delay: 0.45s; }
+        .feature-card:nth-child(9) { animation-delay: 0.5s; }
+        .feature-card:nth-child(10) { animation-delay: 0.55s; }
+        .feature-card:nth-child(11) { animation-delay: 0.6s; }
+        .feature-card:nth-child(12) { animation-delay: 0.65s; }
 
         .feature-card:hover {
             transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
@@ -920,6 +929,182 @@
             margin-top: 1rem;
         }
 
+        /* Editing Showcase Section */
+        .editing-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .editing-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .editing-tool {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .editing-tool:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .editing-tool i {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .editing-tool span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .editing-tool.pro-tool {
+            position: relative;
+        }
+
+        .editing-tool.pro-tool::after {
+            content: 'PRO';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            padding: 0.15rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .editing-visual {
+            position: relative;
+        }
+
+        .editing-preview {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .editing-preview img {
+            width: 100%;
+            display: block;
+        }
+
+        .editing-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+        }
+
+        .editing-slider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .slider-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent-purple));
+            width: 65%;
+            border-radius: 2px;
+            animation: sliderPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes sliderPulse {
+            0%, 100% { width: 65%; }
+            50% { width: 75%; }
+        }
+
+        .slider-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            min-width: 80px;
+        }
+
+        /* Slideshow Section */
+        .slideshow-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .slideshow-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .slideshow-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.15);
+        }
+
+        .slideshow-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        .slideshow-card:nth-child(2) .slideshow-icon {
+            animation-delay: 0.3s;
+        }
+
+        .slideshow-card:nth-child(3) .slideshow-icon {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .slideshow-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .slideshow-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
@@ -1121,6 +1306,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .editing-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .editing-tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .slideshow-features {
+                grid-template-columns: 1fr;
+            }
+
             .privacy-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1173,6 +1370,14 @@
                 grid-template-columns: 1fr;
             }
 
+            .editing-tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .slideshow-features {
+                grid-template-columns: 1fr;
+            }
+
             .privacy-grid {
                 grid-template-columns: 1fr;
             }
@@ -1208,9 +1413,9 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
+                <li><a href="#editing">Editing</a></li>
                 <li><a href="#vault">Vault</a></li>
                 <li><a href="#analytics">Analytics</a></li>
-                <li><a href="#privacy">Privacy</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#download" class="nav-cta">Download</a></li>
             </ul>
@@ -1250,12 +1455,12 @@
                             <div class="stat-label">Offline</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-ban"></i></div>
-                            <div class="stat-value">Zero</div>
-                            <div class="stat-label">Tracking</div>
+                            <div class="stat-icon"><i class="fas fa-palette"></i></div>
+                            <div class="stat-value">12+</div>
+                            <div class="stat-label">Pro Edit Tools</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="stat-icon"><i class="fas fa-th-large"></i></div>
                             <div class="stat-value">7</div>
                             <div class="stat-label">View Modes</div>
                         </div>
@@ -1290,32 +1495,80 @@
                     <div class="feature-icon"><i class="fas fa-lock"></i></div>
                     <h3 class="feature-title">Multi-Vault Security</h3>
                     <p class="feature-description">
-                        Create unlimited secure vaults with individual PIN codes. Each vault can have
-                        its own folders and biometric unlock. Complete isolation for your private photos.
+                        Create unlimited secure vaults with individual PIN, pattern lock, or password.
+                        Each vault has its own folders and biometric unlock with access logs.
                     </p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                    <div class="feature-icon"><i class="fas fa-th-large"></i></div>
                     <h3 class="feature-title">7 View Modes</h3>
                     <p class="feature-description">
-                        Browse your photos in Grid, List, Timeline, Calendar, Map, Filmstrip, or Folder view.
-                        Each mode optimized for different ways to explore your memories.
+                        Browse in Grid, List, Timeline, Calendar, Map, Filmstrip, or Folder view.
+                        Switch instantly between modes optimized for different ways to explore.
                     </p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-magic"></i></div>
                     <h3 class="feature-title">Professional Editor</h3>
                     <p class="feature-description">
-                        50+ filters, healing brush, curves, HSL adjustments, and more. No need for external
-                        apps - professional editing tools built right in.
+                        12+ pro tools: curves, HSL, healing brush, filters with intensity control.
+                        Paint, text, emoji overlays, blur & pixelate for complete editing power.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-video"></i></div>
+                    <h3 class="feature-title">Video Editing</h3>
+                    <p class="feature-description">
+                        Trim videos, apply effects and transitions, adjust quality settings.
+                        Full video editing suite without leaving the app.
                     </p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-tags"></i></div>
                     <h3 class="feature-title">Smart Organization</h3>
                     <p class="feature-description">
-                        Tags with 12 colors, unlimited albums, 5-star ratings, and smart collections.
-                        Organize thousands of photos effortlessly.
+                        Hierarchical tags with 12 colors, unlimited albums, 5-star ratings, color labels,
+                        and smart collections. Organize thousands of photos effortlessly.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <h3 class="feature-title">Smart Compression</h3>
+                    <p class="feature-description">
+                        Compress photos and videos with quality presets. Control output format,
+                        dimensions, and quality. See savings with before/after comparison.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-play-circle"></i></div>
+                    <h3 class="feature-title">Slideshow Mode</h3>
+                    <p class="feature-description">
+                        Create stunning slideshows with Ken Burns effect, 7 transition styles,
+                        background music support, and customizable timing.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-camera-retro"></i></div>
+                    <h3 class="feature-title">Integrated Camera</h3>
+                    <p class="feature-description">
+                        Built-in camera with photo, video, panorama, and portrait modes.
+                        Front/back cameras, flash control, and zoom support.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-info-circle"></i></div>
+                    <h3 class="feature-title">Full Metadata Editor</h3>
+                    <p class="feature-description">
+                        Edit EXIF, XMP, and IPTC metadata. Add ratings, color labels, flags,
+                        titles, descriptions, and keywords like a pro.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-moon"></i></div>
+                    <h3 class="feature-title">5 Dark Themes</h3>
+                    <p class="feature-description">
+                        Choose from Midnight, AMOLED Black, Ocean Blue, Forest Green, or Rose Pink.
+                        Each theme crafted for comfortable viewing.
                     </p>
                 </div>
                 <div class="feature-card">
@@ -1324,22 +1577,6 @@
                     <p class="feature-description">
                         Completely offline. No tracking, no analytics, no ads, no cloud uploads.
                         Your photos stay on your device, under your control.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
-                    <h3 class="feature-title">Interactive Map</h3>
-                    <p class="feature-description">
-                        View your geotagged photos on an interactive map with smart clustering.
-                        Rediscover memories by where you took them.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
-                    <h3 class="feature-title">Complete Metadata</h3>
-                    <p class="feature-description">
-                        Full EXIF viewing and editing. See camera settings, location data, and edit
-                        metadata like a pro with complete control.
                     </p>
                 </div>
                 <div class="feature-card">
@@ -1390,6 +1627,136 @@
         </div>
     </section>
 
+    <!-- Editing Showcase Section -->
+    <section id="editing">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-magic"></i> PRO EDITING</div>
+                <h2 class="section-title">Professional Editing Suite</h2>
+                <p class="section-description">
+                    Edit your photos like a pro with 12+ powerful tools. From basic adjustments
+                    to advanced curves and healing brush - all without leaving the app.
+                </p>
+            </div>
+            <div class="editing-showcase">
+                <div class="editing-text reveal">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">All the Tools You Need</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        TASV includes a complete photo editing suite. Free users get 6 essential tools,
+                        while Pro users unlock the full 12+ tool arsenal including curves, HSL adjustments,
+                        and healing brush for professional-grade edits.
+                    </p>
+                    <div class="editing-tools-grid">
+                        <div class="editing-tool">
+                            <i class="fas fa-crop-alt"></i>
+                            <span>Crop</span>
+                        </div>
+                        <div class="editing-tool">
+                            <i class="fas fa-redo"></i>
+                            <span>Rotate</span>
+                        </div>
+                        <div class="editing-tool">
+                            <i class="fas fa-sun"></i>
+                            <span>Brightness</span>
+                        </div>
+                        <div class="editing-tool">
+                            <i class="fas fa-adjust"></i>
+                            <span>Contrast</span>
+                        </div>
+                        <div class="editing-tool">
+                            <i class="fas fa-tint"></i>
+                            <span>Saturation</span>
+                        </div>
+                        <div class="editing-tool">
+                            <i class="fas fa-palette"></i>
+                            <span>Filters</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Curves</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>HSL</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-band-aid"></i>
+                            <span>Healing</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Paint</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-font"></i>
+                            <span>Text</span>
+                        </div>
+                        <div class="editing-tool pro-tool">
+                            <i class="fas fa-square"></i>
+                            <span>Blur</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="editing-visual reveal">
+                    <div class="editing-preview">
+                        <img src="images/gallery_screen_1.jpg" alt="Photo Editing Preview">
+                        <div class="editing-overlay">
+                            <div class="editing-slider">
+                                <span class="slider-label">Brightness</span>
+                                <div class="slider-track">
+                                    <div class="slider-fill"></div>
+                                </div>
+                            </div>
+                            <div class="editing-slider">
+                                <span class="slider-label">Contrast</span>
+                                <div class="slider-track">
+                                    <div class="slider-fill" style="width: 45%; animation: none;"></div>
+                                </div>
+                            </div>
+                            <div class="editing-slider">
+                                <span class="slider-label">Saturation</span>
+                                <div class="slider-track">
+                                    <div class="slider-fill" style="width: 80%; animation: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section id="slideshow" class="gallery-views">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge"><i class="fas fa-play-circle"></i> SLIDESHOW MODE</div>
+                <h2 class="section-title">Present Your Memories Beautifully</h2>
+                <p class="section-description">
+                    Create stunning slideshows with professional transitions, the Ken Burns effect,
+                    and background music. Perfect for sharing memories with family and friends.
+                </p>
+            </div>
+            <div class="slideshow-features">
+                <div class="slideshow-card reveal">
+                    <div class="slideshow-icon"><i class="fas fa-random"></i></div>
+                    <h3>7 Transitions</h3>
+                    <p>Fade, Slide, Zoom, Dissolve, Flip, Cube, and more. Each transition smoothly blends your photos.</p>
+                </div>
+                <div class="slideshow-card reveal">
+                    <div class="slideshow-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3>Ken Burns Effect</h3>
+                    <p>Cinematic pan and zoom animations that bring your photos to life. A Pro feature that adds movie-like quality.</p>
+                </div>
+                <div class="slideshow-card reveal">
+                    <div class="slideshow-icon"><i class="fas fa-music"></i></div>
+                    <h3>Background Music</h3>
+                    <p>Add your favorite songs as background music. Control timing from 2-30 seconds per slide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Vault Section -->
     <section id="vault">
         <div class="container">
@@ -1406,15 +1773,15 @@
                         <div class="vault-feature">
                             <div class="vault-feature-icon"><i class="fas fa-key"></i></div>
                             <div class="vault-feature-text">
-                                <h4>Individual PINs</h4>
-                                <p>Each vault has its own 6-digit PIN code</p>
+                                <h4>3 Auth Types</h4>
+                                <p>PIN, pattern lock, or password per vault</p>
                             </div>
                         </div>
                         <div class="vault-feature">
                             <div class="vault-feature-icon"><i class="fas fa-folder"></i></div>
                             <div class="vault-feature-text">
                                 <h4>Folder Organization</h4>
-                                <p>Create folders within each vault</p>
+                                <p>Hierarchical folders within each vault</p>
                             </div>
                         </div>
                         <div class="vault-feature">
@@ -1607,6 +1974,21 @@
                     <span class="analytics-badge">Pro Feature</span>
                 </div>
                 <div class="analytics-card reveal">
+                    <div class="analytics-icon"><i class="fas fa-photo-video"></i></div>
+                    <h3 class="analytics-title">Quality Analysis</h3>
+                    <p class="analytics-description">
+                        Categorize your media by resolution quality. See how many 8K, 4K, QHD,
+                        FHD, HD, and SD files you have at a glance.
+                    </p>
+                    <ul class="analytics-features-list">
+                        <li>Resolution categorization</li>
+                        <li>8K/4K/QHD detection</li>
+                        <li>Quality distribution chart</li>
+                        <li>Low-quality file finder</li>
+                    </ul>
+                    <span class="analytics-badge">Pro Feature</span>
+                </div>
+                <div class="analytics-card reveal">
                     <div class="analytics-icon"><i class="fas fa-video"></i></div>
                     <h3 class="analytics-title">Video Analytics</h3>
                     <p class="analytics-description">
@@ -1720,9 +2102,9 @@
                     </button>
                     <div class="faq-answer">
                         <p>
-                            Free tier allows 1 vault with up to 5 items. Pro tier unlocks unlimited vaults with
-                            unlimited items. Each vault can have its own folders, PIN code, and organizational structure.
-                            Perfect for separating different types of private content.
+                            Free tier allows 2 vaults with up to 10 items each. Pro tier unlocks unlimited vaults with
+                            unlimited items. Each vault can have its own folders, authentication method (PIN, pattern, or password),
+                            and organizational structure. Perfect for separating different types of private content.
                         </p>
                     </div>
                 </div>
@@ -1795,8 +2177,9 @@
                     <h4>Product</h4>
                     <ul>
                         <li><a href="#features">Features</a></li>
+                        <li><a href="#editing">Editing</a></li>
+                        <li><a href="#vault">Vault</a></li>
                         <li><a href="#analytics">Analytics</a></li>
-                        <li><a href="#download">Download</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
